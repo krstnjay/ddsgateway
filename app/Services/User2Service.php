@@ -11,18 +11,26 @@
         */
         
         public $baseUri;
+
+        /**
+         * The secret to consume the User1 Service
+         * @var string
+         */
+        
+        public $secret;
         
         public function __construct()
         {
             $this->baseUri = config('services.users2.base_uri');
+            $this->secret = config('services.users2.secret');
         }
 
         /**
-        * Obtain the full list of Users from User2 Site
+        * Obtain the full list of Users from User1 Site
         * @return string
         */
 
-        public function obtainUsers2()
+        public function obtainUsers()
         {
             return $this->performRequest('GET', '/users'); 
         }
@@ -32,12 +40,17 @@
         * @return string
         */
 
-        public function createUser2($data)
+        public function createUser($data)
         {
             return $this->performRequest('POST', '/users', $data);
         }
 
-        public function obtainUser2($id)
+        /**
+        * Obtain the full list of Users from User2 Site
+        * @return string
+        */
+
+        public function obtainUser($id)
         {
             return $this->performRequest('GET', "/users/{$id}");
         }
@@ -47,7 +60,7 @@
         * @return string
         */
         
-        public function editUser2($data, $id)
+        public function editUser($data, $id)
         {
         return $this->performRequest('PUT', "/users/{$id}", $data);
         }
@@ -57,7 +70,7 @@
         * @return Illuminate\Http\Response
         */
 
-        public function delete($id)
+        public function deleteUser($id)
         {
             return $this->performRequest('DELETE', "/users/{$id}");
         }
